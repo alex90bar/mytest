@@ -5,6 +5,7 @@ import com.example.alex90bar.mytest.api.request.RegisterRq;
 import com.example.alex90bar.mytest.api.response.AuthRs;
 import com.example.alex90bar.mytest.service.AuthService;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

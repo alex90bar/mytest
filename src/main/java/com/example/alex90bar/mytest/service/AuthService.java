@@ -8,6 +8,7 @@ import com.example.alex90bar.mytest.repository.UserRepository;
 import com.example.alex90bar.mytest.security.JwtProvider;
 import javax.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -21,6 +22,7 @@ import org.springframework.stereotype.Service;
  * @author alex90bar
  */
 
+@Slf4j
 @Service
 @AllArgsConstructor
 public class AuthService {
@@ -32,18 +34,22 @@ public class AuthService {
 
   @Transactional
   public void signup(RegisterRq registerRequest) {
+    log.info("signup begins " + registerRequest.toString());
     UserEntity user = new UserEntity();
     user.setUserName(registerRequest.getName());
     user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
     userRepository.save(user);
+    log.info("signup ends");
   }
 
 
   public AuthRs login(LoginRq loginRq) {
+    log.info("Login begins " + loginRq.toString());
     Authentication authentication = authenticationManager
         .authenticate(new UsernamePasswordAuthenticationToken(loginRq.getName(), loginRq.getPassword()));
     SecurityContextHolder.getContext().setAuthentication(authentication);
     String token = jwtProvider.generateToken(authentication);
+    log.info("login ends");
     return new AuthRs(token, loginRq.getName());
   }
 

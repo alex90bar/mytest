@@ -2,6 +2,7 @@ package com.example.alex90bar.mytest.config;
 
 import com.example.alex90bar.mytest.security.JwtAuthenticationFilter;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
