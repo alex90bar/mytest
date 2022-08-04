@@ -33,7 +33,7 @@ public class JwtProvider {
         .setSubject(principal.getUsername())
         .setIssuedAt(Date.from(Instant.now()))
         .signWith(jwtAccessSecret, SignatureAlgorithm.HS256)
-        .setExpiration(Date.from(Instant.now().plusMillis(9000000)))
+        .setExpiration(Date.from(Instant.now().plusMillis(1209600000)))  //примерно 2 недели
         .compact();
   }
 

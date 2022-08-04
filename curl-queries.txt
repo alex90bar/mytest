@@ -1,0 +1,4 @@
+curl -X POST http://localhost:8089/api/auth/login -H 'Content-Type: application/json' -d '{"name":"user","password":"pass"}'
+curl -X POST http://localhost:8089/api/auth/signup -H 'Content-Type: application/json' -d '{"name":"userNew","password":"passNew"}'
+curl -X POST http://localhost:8089/api/message -H "Authorization: Bearer_eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwiaWF0IjoxNjU5NjE2OTg4LCJleHAiOjE2NjA4MjY1ODh9.FCgVbAzmWrIFos6Q-60YK67KbFyl-0joLyS39qLGGLE" -H 'Content-Type: application/json' -d '{"name":"user","message":"some text"}'
+curl -X POST http://localhost:8089/api/message -H "Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwiaWF0IjoxNjU5NjE2OTg4LCJleHAiOjE2NjA4MjY1ODh9.FCgVbAzmWrIFos6Q-60YK67KbFyl-0joLyS39qLGGLE" -H 'Content-Type: application/json' -d '{"name":"user","message":"history 10"}'

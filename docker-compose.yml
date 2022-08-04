@@ -12,11 +12,12 @@ services:
       - docker/postgres/env/postgres.dev.env
     volumes:
 #      - ./docker/postgres/data:/var/lib/postgresql/data
-      - ./docker/postgres/sql/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./docker/postgres/sql/data.sql:/docker-entrypoint-initdb.d/data.sql
     restart: unless-stopped
 
   # My-test
   my-test:
+    image: alex90bar/mytest
     build: ./
     container_name: java-app
     ports:

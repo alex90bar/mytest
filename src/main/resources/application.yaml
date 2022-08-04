@@ -10,7 +10,10 @@ spring:
     password: ${PASS_DB:postgres}
     driverClassName: org.postgresql.Driver
 
-
+  sql:
+    init:
+      data-locations: classpath:data.sql
+      mode: always
 
   jpa:
     show-sql: true
