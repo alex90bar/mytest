@@ -5,7 +5,14 @@ MytestApplication - это учебный проект на Spring Boot, с ис
 Порт приложения: 8089.
 
 Приложение упаковано в докер-контейнер. 
-При запуске контейнера БД заполняется тестовыми данными, можно проходить авторизацию с использованием name=user, password=pass.
+При запуске контейнера БД заполняется тестовыми данными, можно проходить авторизацию с использованием credentials в формате JSON:
+
+```json
+{ 
+  "name": "user",
+  "password": "pass"
+}
+```
 
 Скрипты для запуска приложения и БД:
 ```
@@ -15,37 +22,19 @@ docker run --network=my-network --rm -p 8089:8089 -e DATABASE_URL=postgresql://p
 
 ```
 
+
+
 Список эндпоинтов:
 
-http://localhost:8089/api/auth/signup - регистрация нового пользователя, запрос POST в формате JSON:
+| Endpoint       | Needs token | Description   |  JSON Body    |
+| :---          |    :----:   |          ---:   | ---: |
+| http://localhost:8089/api/auth/signup  | No token      |  регистрация нового пользователя, запрос POST в формате JSON:  |  ```{"name": "username", "password": "password"} ```    |
+| http://localhost:8089/api/auth/login  | No token       | Аутентификация и авторизация, получение jwt-токена, запрос POST в формате JSON: | ```{"name": "user", "password": "pass"} ```      |
+| http://localhost:8089/api/message | Needs Bearer Token |Публикация нового сообщения с текстом "some text", запрос POST в формате JSON: | ```{"name": "user", "message": "some text"} ``` |
+| http://localhost:8089/api/message  | Needs Bearer Token  | Получение последних 10 сообщений, отсортированных по убыванию, запрос POST в формате JSON:  |```{ "name": "user", "message": "history 10" }``` |
 
-`{
-"name": "username",
-"password": "password"
-}`
-
-http://localhost:8089/api/auth/login - Аутентификация и авторизация, получение jwt-токена, запрос POST в формате JSON:
-
-`{
-"name": "username",
-"password": "password"
-}`
-
-http://localhost:8089/api/message - Публикация нового сообщения, требует указанный в заголовке Authorization Bearer-токен, в формате Bearer_ + tokenValue (например, Bearer_eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwiaWF0IjoxNjU5NjE2OTg4LCJleHAiOjE2NjA4MjY1ODh9.FCgVbAzmWrIFos6Q-60YK67KbFyl-0joLyS39qLGGLE), запрос POST в формате JSON:
-
-`{
-"name": "user",
-"message": "some text"
-}
-`
-
-http://localhost:8089/api/message - Получение последних 10 сообщений, отсортированных по убыванию, требует указанный в заголовке Authorization Bearer-токен, в формате Bearer_ + tokenValue (например, Bearer_eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwiaWF0IjoxNjU5NjE2OTg4LCJleHAiOjE2NjA4MjY1ODh9.FCgVbAzmWrIFos6Q-60YK67KbFyl-0joLyS39qLGGLE), запрос POST в формате JSON:
-
-`{
-"name": "user",
-"message": "history 10"
-}
-`
+В запросах, где нужен токен, в заголовке Authorization должен быть указан Bearer-токен, в формате Bearer_ + tokenValue (например, `Bearer_eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwiaWF0IjoxNjU5NjE2OTg4LCJleHAiOjE2NjA4MjY1ODh9.FCgVbAzmWrIFos6Q-60YK67KbFyl-0joLyS39qLGGLE`).
+<br><br>
 
 Запросы для проверки работоспособности через curl:
 
