@@ -2,14 +2,13 @@ package com.example.alex90bar.mytest.controller;
 
 import com.example.alex90bar.mytest.api.request.MessageRq;
 import com.example.alex90bar.mytest.api.response.MessageRs;
-import com.example.alex90bar.mytest.model.MessageEntity;
-import com.example.alex90bar.mytest.service.AuthService;
 import com.example.alex90bar.mytest.service.MessageService;
 import java.util.List;
+import javax.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author alex90bar
  */
 
+@Validated
 @RestController
 @AllArgsConstructor
 @Transactional
@@ -32,7 +32,7 @@ public class MessageController {
 
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
-  public List<MessageRs> listenMessage(@RequestBody MessageRq messageRq){
+  public List<MessageRs> listenMessage(@Valid @RequestBody MessageRq messageRq){
     return messageService.listenMessage(messageRq);
   }
 

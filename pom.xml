@@ -46,11 +46,14 @@
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
     </dependency>
+
     <dependency>
       <groupId>org.springframework.security</groupId>
       <artifactId>spring-security-test</artifactId>
-      <scope>test</scope>
+      <version>4.2.20.RELEASE</version>
     </dependency>
+
+<!--    работа с jwt-->
     <dependency>
       <groupId>io.jsonwebtoken</groupId>
       <artifactId>jjwt-api</artifactId>
@@ -66,15 +69,22 @@
       <artifactId>jjwt-jackson</artifactId>
       <version>0.10.5</version>
     </dependency>
+<!--    маппинг сущностей-->
     <dependency>
       <groupId>org.mapstruct</groupId>
       <artifactId>mapstruct</artifactId>
       <version>1.5.2.Final</version>
     </dependency>
+    <!--    связка Lombok и MapStruct-->
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok-mapstruct-binding</artifactId>
       <version>0.2.0</version>
+    </dependency>
+    <!--    валидация данных -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-validation</artifactId>
     </dependency>
   </dependencies>
 

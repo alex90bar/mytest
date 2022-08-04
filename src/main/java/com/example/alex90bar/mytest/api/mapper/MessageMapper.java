@@ -3,7 +3,7 @@ package com.example.alex90bar.mytest.api.mapper;
 import com.example.alex90bar.mytest.api.request.MessageRq;
 import com.example.alex90bar.mytest.api.response.MessageRs;
 import com.example.alex90bar.mytest.model.MessageEntity;
-import java.time.Instant;
+import java.text.DateFormat;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -28,8 +28,7 @@ public interface MessageMapper {
   MessageRs mapMessageEntityToMessageRs(MessageEntity messageEntity);
 
   default String generateTimeCreated(Long timeCreated){
-    Instant instant = Instant.ofEpochMilli(timeCreated);
-    return instant.toString();
+    return DateFormat.getDateTimeInstance().format(timeCreated);
   };
 
 }

@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
  * @author alex90bar
  */
 
+
 @Slf4j
 @Service
 @AllArgsConstructor
@@ -29,17 +30,22 @@ public class MessageService {
   private final MessageMapper mapper;
 
   public List<MessageRs> listenMessage(MessageRq messageRq) {
+    log.info("listenMessage begins " + messageRq.toString());
+
+
     if (!messageRq.getMessage().equals("history 10")) {
 
       MessageEntity messageEntity = mapper.mapMessageRqToEntity(messageRq);
       messageRepository.save(messageEntity);
 
+      log.info("listenMessage ends");
       return new ArrayList<>();
     } else {
 
       List<MessageEntity> messages = messageRepository
           .findTop10ByTimeCreatedBeforeOrderByTimeCreatedDesc(System.currentTimeMillis());
 
+      log.info("listenMessage ends");
       return messages.stream().map(mapper::mapMessageEntityToMessageRs)
           .collect(Collectors.toList());
     }
