@@ -13,6 +13,7 @@ import org.mapstruct.Mapping;
  * @author alex90bar
  */
 
+//Маппинг сущностей через MapStruct
 @Mapper(componentModel = "spring")
 public interface MessageMapper {
 

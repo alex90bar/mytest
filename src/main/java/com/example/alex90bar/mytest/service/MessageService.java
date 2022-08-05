@@ -32,7 +32,7 @@ public class MessageService {
   public List<MessageRs> listenMessage(MessageRq messageRq) {
     log.info("listenMessage begins " + messageRq.toString());
 
-
+//Если текст сообщения "history 10" - возвращаем 10 последний сообщений, иначе создаем новое сообщение в БД.
     if (!messageRq.getMessage().equals("history 10")) {
 
       MessageEntity messageEntity = mapper.mapMessageRqToEntity(messageRq);
